@@ -107,13 +107,9 @@ const handleUpdate = (index) => {
         <tr className="table-header-row" style={{ borderBottom: '1px solid black' }}>
           <th>Tender Name</th>
           <th>Deadline</th>
-          <th>Type</th>
-          <th>Category</th>
+          <th>Name</th>
           <th>Location</th>
           <th>Amount</th>
-          <th>Inviting Authority Name</th>
-          <th>Business Name</th>
-          <th>Business Location</th>
           {/* <th style={{ border: '1px solid black', padding: '8px' }}> Action</th> */}
         </tr>
       </thead>
@@ -121,14 +117,10 @@ const handleUpdate = (index) => {
         {data?.map((tender, index) => (
           <tr className="table-data-row" key={index} style={{ borderBottom: '1px solid black' }}>
             <td>{tender.tenderName}</td>
-            <td>{tender.tenderDeadline}</td>
-            <td>{tender.tenderType}</td>
-            <td>{tender.tenderCategory}</td>
+            <td>{tender.endDate}</td>
+            <td>{tender.tenderName}</td>
             <td>{tender.tenderLocation}</td>
             <td>{tender.tenderAmount}</td>
-            <td>{tender.invitingAuthorityName}</td>
-            <td>{tender.businessName}</td>
-            <td>{tender.businessLocation}</td>
             {/* <td className="action-buttons" style={{ border: '1px solid black', padding: '8px' }}>
               <button onClick={() => handleUpdate(index)}>Update</button>
               <button onClick={() => handleDelete(index)}>Delete</button>

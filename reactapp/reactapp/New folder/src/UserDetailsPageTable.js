@@ -100,11 +100,9 @@ const handleUpdate = (index) => {
           <tr style={{ borderBottom: '1px solid black' }}>
             <th>Tender Name</th>
             <th>Deadline</th>
-            <th>Type</th>
-            <th>Category</th>
+            <th>Name</th>
             <th>Location</th>
             <th>Amount</th>
-            <th>Inviting Authority Name</th>
             <th style={{ border: '1px solid black', padding: '8px' }}> Action</th>
           </tr>
         </thead>
@@ -113,13 +111,11 @@ const handleUpdate = (index) => {
             <tr key={tender.id} style={{ borderBottom: '1px solid black' }}>
               <td>{tender.tenderName}</td>
               <td>{tender.endDate}</td>
-              <td>{tender.tenderType}</td>
-              <td>{tender.tenderCategory}</td>
+              <td>{tender.tenderName}</td>
               <td>{tender.tenderLocation}</td>
               <td>{tender.tenderAmount}</td>
-              <td>{tender.invitingAuthorityName}</td>
               <td style={{ border: '1px solid black', padding: '8px' }}>
-                <button onClick={handleDelete(tender.id)}>Delete</button>
+                {/* <button onClick={handleDelete}>Delete</button> */}
               </td>
             </tr>
           ))}
