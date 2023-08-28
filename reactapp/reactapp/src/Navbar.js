@@ -51,9 +51,9 @@ export default function Navbar(){
             <li className="nav-item">
               <Link className="nav-link" to='/AboutUs'>About Us</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to='/ContactUs'>Contact Us</Link>
-            </li>
+            </li> */}
 
             {/* Copy for testing, comment when done */}
             {/* <li className="nav-item">

@@ -177,8 +177,8 @@ export default function SearchBar() {
   let tenderName = '';
   let tenderCategory = 'Construction';
   let tenderLocation = '';
-  let MinPrice = '';
-  let MaxPrice = '';
+  let MinPrice = 0;
+  let MaxPrice = 0;
   let AdvSearchArr = [];
   let basSearchArr = [];
 

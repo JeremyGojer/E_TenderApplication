@@ -127,7 +127,7 @@ return (
                     </td>
                 </tr>
                 <tr>
-                    <td className='registration-label'> Password: <input type="text" maxLength={10} name="password" className="form-control"  value={RegisterNewUser.password} onChange={handleInputChange}></input>
+                    <td className='registration-label'> Password: <input type="password" maxLength={10} name="password" className="form-control"  value={RegisterNewUser.password} onChange={handleInputChange}></input>
                     </td>
                 </tr>
             </tbody>

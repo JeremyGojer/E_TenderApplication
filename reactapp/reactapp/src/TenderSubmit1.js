@@ -233,7 +233,7 @@ return(
           className={`form-control ${FormData.tenderCategory ? 'is-valid' : 'is-invalid'}`}
         >
           <option value="">-----</option>
-          <option value="Media">Media</option>
+          {/* <option value="Media">Media</option> */}
           <option value="Construction">Construction</option>
           <option value="Defence">Defence</option>
           <option value="State Electricity">State Electricity</option>
@@ -307,13 +307,13 @@ return(
         placeholder="Address"
       />
     </div>
-    <div className="form-group">
+    {/* <div className="form-group">
       <input className="form-check-input" type="checkbox" id="gridCheck" required />
       <label className="form-check-label" htmlFor="gridCheck">
         Agree to Terms & Conditions
       </label>
       <div className="invalid-feedback">You must agree to the Terms & Conditions to submit the form.</div>
-    </div>
+    </div> */}
     <button type="submit" class="btn btn-primary" onClick={handleSubmit} >
       Submit
     </button>
