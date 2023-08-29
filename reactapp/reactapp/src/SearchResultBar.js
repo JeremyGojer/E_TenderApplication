@@ -268,7 +268,7 @@ export default function SearchBar() {
 
   return (
     <div>
-      <table className="search-table">
+      <table className="search-table" style={{marginTop:"8vh", border:"5px"}}>
         <thead>
           <th>
             <h3>Search Results</h3>
@@ -290,8 +290,8 @@ export default function SearchBar() {
           </tr>
           &nbsp;
           <tr>
-            <td>
-              <button onClick={handleAdvancedSearchToggle}>Advanced Search</button>
+            <td style={{width:"920px", height:"50px"}}>
+              <button onClick={handleAdvancedSearchToggle} style={{margin:"5px"}}>Advanced Search</button>
               {advancedSearchOpen && (
                 <div className="advanced-search">
                   {/* Add advanced search fields here */}

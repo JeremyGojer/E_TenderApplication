@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import './LoginPage.css'
 import jwt_decode from "jwt-decode";
 
-export default function LoginPage(handleLogin){
+export default function LoginPage(){
 
   const navigate = useNavigate();
   let LoginData = {
@@ -65,7 +65,7 @@ const sendLogin = () => {
     (res)=>{
       if(res.data.username!=null){
         localStorage.setItem("UserSession",JSON.stringify(res.data))
-        handleLogin(res.data)
+        
         navigate("/UserDetails")
       }
     }

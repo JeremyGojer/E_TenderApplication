@@ -101,7 +101,7 @@ const handleUpdate = (index) => {
       </tr>
     </table>
 
-    <table className="user-details-table" style={{ border: '1px solid black', borderCollapse: 'collapse', width: '100%' }}>
+    <table className="user-details-table" style={{ border: '1px solid black', borderCollapse: 'collapse', width: '98%', margin:"1%" }}>
       <thead>
         <tr className="table-header-row" style={{ borderBottom: '1px solid black' }}>
           <th>Tender Name</th>
@@ -135,7 +135,17 @@ const handleUpdate = (index) => {
                       getTenderForUser(tenderData)
                     }
                     
-                  )
+                )
+                axios.post("http://localhost:7000/deleteData/",{
+                    "organizationDetails.referenceNo": tender.referenceno
+                }).then(
+                    (res)=>{
+                      console.log("deleted for reference no "+tender.referenceno)
+                      getTenderForUser(tenderData)
+                    }
+                    
+                )
+
                   
               }}>Delete</button>
             </td>

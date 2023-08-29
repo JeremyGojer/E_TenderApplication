@@ -5,16 +5,6 @@ import './App.css'
 
 export default function Navbar(){
 
-  //let user = localStorage.getItem("UserSession")
-  //const [user, setUser] = useState(localStorage.getItem("UserSession"));
-
-  //const { user } = useUser();
-
-  // Use useEffect to update the 'user' state when localStorage changes
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("UserSession");
-  //   setUser(storedUser);
-  // }, [localStorage.getItem("UserSession")]);
   const [user, setUser] = useState(localStorage.getItem("UserSession"));
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import './TenderSubmit1.css';
 
@@ -15,11 +15,12 @@ export default function SubmitTender1(){
     
   
     // Format the date as "YYYY-MM-DD" string
+    const un = JSON.parse(localStorage.getItem("UserSession")).username
     const postDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
   
     const username = "Hello";
 
-    var referenceNo = username+Math.floor(Math.random() * 10000000);
+    var referenceNo = un+Math.floor(Math.random() * 10000000);
 
 let initialData = {
     
@@ -94,17 +95,29 @@ let initialData = {
         // };
 
         const [successMessage, setSuccessMessage] = useState('');
+        
+        const [isFormValid, setIsFormValid] = useState(false);
+        const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+        const [deadlineError, setDeadlineError] = useState('');
 
         const handleSubmit = (e) => {
             e.preventDefault();
+            if (isFormValid && isTermsAccepted) {
+                const selectedDate = new Date(FormData.tenderDeadline);
+                const currentDate = new Date();
+                
+                if (selectedDate < currentDate) {
+                    setSuccessMessage('Tender Deadline cannot be a past date.');
+                    return;
+                }
         
             // Assign referenceNo
-            const newReferenceNo = JSON.parse(localStorage.getItem("UserSession"))?.username + Math.floor(Math.random() * 10000000);
+            // const newReferenceNo = username + Math.floor(Math.random() * 10000000);
         
             // Create a copy of FormData with the updated referenceNo
-            const updatedFormData = { ...FormData, referenceNo: newReferenceNo };
+            const updatedFormData = { ...FormData};
             setFormData(updatedFormData); // Update state with new referenceNo
-        
+            console.log("Handle Submit wala data",updatedFormData)
             // Create obj with updated FormData
             const updatedObj = {
                 "organizationDetails": updatedFormData,
@@ -113,11 +126,52 @@ let initialData = {
             };
         
             // Call the functions
-            addUserInfo({...updatedFormData,referenceNo:updatedObj.organizationDetails.referenceNo});
             addTender(updatedObj);
+            addUserInfo(updatedFormData);
             console.log(updatedObj);
             setSuccessMessage('Form submitted successfully!');
+        } else {
+          setSuccessMessage('Please fill in all required fields.');
+        }
         };
+        useEffect(() => {
+            const isValid =
+              FormData.tenderName &&
+              FormData.tenderLocation &&
+              FormData.tenderDeadline &&
+              FormData.tenderCategory &&
+              FormData.tenderAmount &&
+              FormData.paymentMode &&
+              BusFormData.businessName &&
+              BusFormData.businessLocation;
+            setIsFormValid(isValid);
+          }, [FormData, BusFormData]);
+
+
+          
+        // const handleSubmit = (e) => {
+        //     e.preventDefault();
+        
+        //     // Assign referenceNo
+        //     const newReferenceNo = JSON.parse(localStorage.getItem("UserSession"))?.username + Math.floor(Math.random() * 10000000);
+        
+        //     // Create a copy of FormData with the updated referenceNo
+        //     const updatedFormData = { ...FormData, referenceNo: newReferenceNo };
+        //     setFormData(updatedFormData); // Update state with new referenceNo
+        
+        //     // Create obj with updated FormData
+        //     const updatedObj = {
+        //         "organizationDetails": updatedFormData,
+        //         "business": BusFormData,
+        //         "attachments": null
+        //     };
+        
+        //     // Call the functions
+        //     addUserInfo({...updatedFormData,referenceNo:updatedObj.organizationDetails.referenceNo});
+        //     addTender(updatedObj);
+        //     console.log(updatedObj);
+        //     setSuccessMessage('Form submitted successfully!');
+        // };
 
         
         const addTender = (obj) => {
@@ -308,6 +362,18 @@ return(
         placeholder="Address"
       />
     </div>
+    <div className="form-group">
+      <input className="form-check-input" type="checkbox" id="gridCheck" checked={isTermsAccepted}
+            onChange={() => setIsTermsAccepted(!isTermsAccepted)}
+            required />
+      <label className="form-check-label" htmlFor="gridCheck" >
+        Agree to Terms & Conditions
+      </label>
+      <div className="invalid-feedback">You must agree to the Terms & Conditions to submit the form.</div>
+    </div>
+    <button type="submit" class="btn btn-primary" onClick={handleSubmit} disabled={!isFormValid || !isTermsAccepted}>
+      Submit
+    </button>
     {/* <div className="form-group">
       <input className="form-check-input" type="checkbox" id="gridCheck" required />
       <label className="form-check-label" htmlFor="gridCheck">
@@ -315,9 +381,11 @@ return(
       </label>
       <div className="invalid-feedback">You must agree to the Terms & Conditions to submit the form.</div>
     </div> */}
-    <button type="submit" class="btn btn-primary" onClick={handleSubmit} >
+    {/* <button type="submit" class="btn btn-primary" onClick={handleSubmit} >
       Submit
-    </button>
+    </button> */}
+
+
     {successMessage && (
         <div className="alert alert-success mt-3" role="alert">
           {successMessage}
