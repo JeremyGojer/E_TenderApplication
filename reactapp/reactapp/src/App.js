@@ -14,32 +14,37 @@ import TenderSubmit from './TenderSubmit1';
 import LogOut from './LogOut';
 import Image from './tender.jpg'
 import VerifyByOTP from './VerifyByOTP';
-//import { useEffect, useState } from 'react';
+import { UserProvider } from './UserContext';
+import { useState } from 'react';
+import {useNavigate } from 'react-router-dom';
 
 function App() {
 
-  // let [nav,setNav] = useState({});
-  // let user = localStorage.getItem("UserSession")
-  //  useEffect(()=>{
-  //   user = localStorage.getItem("UserSession")
-  //   if(user!=null){
-  //     setNav(user)
-  //   }
-  //   else{
-  //     setNav(null)
-  //   }
-      
-  //   },[{...user}])
+  const navigate = useNavigate();
+  const [user, setUser] = useState(localStorage.getItem("UserSession"));
+
+  const handleLogin = (userData) => {
+    // ... logic to handle login ...
+    setUser(userData);
+    navigate('/');
+  };
+
+  const handleLogout = () => {
+    // ... logic to handle logout ...
+    setUser(null);
+    navigate('/');
+  };
 
   return (
+    <UserProvider>
     <div className="App" style={{ margin:"auto",backgroundImage: 'url(' + Image + ')'}}>
       <header className="App-header">
         <Routes>
-          <Route path='/' element={<Navbar></Navbar>}>
+          <Route path='/' element={<Navbar user={user}></Navbar>}>
             <Route path='/Search' element={<Search></Search>}></Route>
-            <Route path="/LogOut" element={<LogOut></LogOut>}></Route>
+            <Route path="/LogOut" element={<LogOut handleLogout={handleLogout}></LogOut>}></Route>
             <Route path='/Search1' element={<Search1></Search1>}></Route>
-            <Route path='/Login' element={<LoginPage></LoginPage>}></Route>
+            <Route path='/Login' element={<LoginPage handleLogin={handleLogin}></LoginPage>}></Route>
             <Route path='/Register' element={<Register></Register>}></Route>
             <Route path='/AboutUs' element={<AboutUs></AboutUs>}></Route>
             <Route path='/ContactUs' element={<ContactUs></ContactUs>}></Route>
@@ -57,6 +62,7 @@ function App() {
       </header>
       <Outlet></Outlet>
     </div>
+    </UserProvider>
   );
 }
 

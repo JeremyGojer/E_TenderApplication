@@ -99,7 +99,7 @@ let initialData = {
             e.preventDefault();
         
             // Assign referenceNo
-            const newReferenceNo = username + Math.floor(Math.random() * 10000000);
+            const newReferenceNo = JSON.parse(localStorage.getItem("UserSession"))?.username + Math.floor(Math.random() * 10000000);
         
             // Create a copy of FormData with the updated referenceNo
             const updatedFormData = { ...FormData, referenceNo: newReferenceNo };
@@ -113,8 +113,8 @@ let initialData = {
             };
         
             // Call the functions
+            addUserInfo({...updatedFormData,referenceNo:updatedObj.organizationDetails.referenceNo});
             addTender(updatedObj);
-            addUserInfo(updatedFormData);
             console.log(updatedObj);
             setSuccessMessage('Form submitted successfully!');
         };
@@ -131,7 +131,8 @@ let initialData = {
          const addUserInfo = (updatedFormData)=>{
             var obj2 = {
                 username:JSON.parse(localStorage.getItem("UserSession"))?.username,
-                referenceNo:updatedFormData.referenceNo,
+                userId:JSON.parse(localStorage.getItem("UserSession"))?.id,
+                referenceno:updatedFormData.referenceNo,
                 tenderName:updatedFormData.tenderName,
                 tenderLocation:updatedFormData.tenderLocation,
                 postDate:updatedFormData.postDate,

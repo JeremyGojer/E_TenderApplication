@@ -1,21 +1,32 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet,useNavigate } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 import './App.css'
-//import { useEffect, useState } from 'react';
+
 
 export default function Navbar(){
 
-  //let [nav,setNav] = useState({});
-  let user = localStorage.getItem("UserSession")
-  //  useEffect(()=>{
-  //   user = localStorage.getItem("UserSession")
-  //   if(user!=null){
-  //     setNav(user)
-  //   }
-  //   else{
-  //     setNav(null)
-  //   }
-      
-  //   },[{...user}])
+  //let user = localStorage.getItem("UserSession")
+  //const [user, setUser] = useState(localStorage.getItem("UserSession"));
+
+  //const { user } = useUser();
+
+  // Use useEffect to update the 'user' state when localStorage changes
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("UserSession");
+  //   setUser(storedUser);
+  // }, [localStorage.getItem("UserSession")]);
+  const [user, setUser] = useState(localStorage.getItem("UserSession"));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Whenever the "UserSession" value changes in localStorage,
+    // update the "user" state accordingly
+    const storedUser = localStorage.getItem("UserSession");
+    setUser(storedUser);
+
+    // Use navigate to re-render the Navbar
+    navigate(); // This will trigger a re-render of the Navbar
+  }, [navigate]);
    
 
 
@@ -51,17 +62,6 @@ export default function Navbar(){
             <li className="nav-item">
               <Link className="nav-link" to='/AboutUs'>About Us</Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to='/ContactUs'>Contact Us</Link>
-            </li> */}
-
-            {/* Copy for testing, comment when done */}
-            {/* <li className="nav-item">
-              <Link className="nav-link" to='/UserDetails'>User Details</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to='/TenderSubmit'>Add Tender</Link>
-            </li> */}
             
           </ul>
           

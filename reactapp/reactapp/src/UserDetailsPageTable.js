@@ -109,6 +109,7 @@ const handleUpdate = (index) => {
           <th>Deadline</th>
           <th>Location</th>
           <th>Amount</th>
+          <th>Delete</th>
           {/* <th style={{ border: '1px solid black', padding: '8px' }}> Action</th> */}
         </tr>
       </thead>
@@ -121,10 +122,23 @@ const handleUpdate = (index) => {
             <td scope='col'>{tender.tenderLocation}</td>
             <td scope='col'>{tender.tenderAmount}</td>
             
-            {/* <td className="action-buttons" style={{ border: '1px solid black', padding: '8px' }}>
-              <button onClick={() => handleUpdate(index)}>Update</button>
-              <button onClick={() => handleDelete(index)}>Delete</button>
-            </td> */}
+            <td className="action-buttons" style={{ border: '1px solid black', padding: '8px' }}>
+              {/* <button onClick={() => handleUpdate(index)}>Update</button> */}
+              <button onClick={() => {
+                axios.delete("http://localhost:8282/deleteTendersForUser/",{
+                  params: {
+                    referenceno: tender.referenceno
+                  }
+                }).then(
+                    (res)=>{
+                      console.log("deleted for reference no "+tender.referenceno)
+                      getTenderForUser(tenderData)
+                    }
+                    
+                  )
+                  
+              }}>Delete</button>
+            </td>
           </tr>
         ))}
       </tbody>
