@@ -5,18 +5,22 @@ import Navbar from './Navbar';
 import Register from './RegistrationForm';
 import LoginPage from './LoginPage';
 import Search from './SearchResultBar';
+import SearchBid from "./SearchResultBarBid";
 import Search1 from './SearchResultsBarWorking';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
 import UserDetails from './UserDetailsPageTable';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import TenderSubmit from './TenderSubmit1';
+import BidByUser from "./BidByUser";
+import BidPage from './BidPage';
 import LogOut from './LogOut';
 import Image from './tender.jpg'
 import VerifyByOTP from './VerifyByOTP';
 import { UserProvider } from './UserContext';
 import { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
+
 
 function App() {
 
@@ -43,12 +47,20 @@ function App() {
           <Route path='/' element={<Navbar user={user}></Navbar>}>
             <Route path='/Search' element={<Search></Search>}></Route>
             <Route path="/LogOut" element={<LogOut handleLogout={handleLogout}></LogOut>}></Route>
-            <Route path='/Search1' element={<Search1></Search1>}></Route>
+            <Route path='/SearchBid' element={
+            <PrivateRoute><SearchBid></SearchBid></PrivateRoute>
+            }></Route>
             <Route path='/Login' element={<LoginPage handleLogin={handleLogin}></LoginPage>}></Route>
             <Route path='/Register' element={<Register></Register>}></Route>
             <Route path='/AboutUs' element={<AboutUs></AboutUs>}></Route>
             <Route path='/ContactUs' element={<ContactUs></ContactUs>}></Route>
             <Route path='/VerifyOTP' element={<VerifyByOTP></VerifyByOTP>}></Route>
+            <Route path='/BidByUser' element={
+            <PrivateRoute><BidByUser></BidByUser></PrivateRoute>
+            }></Route>
+            <Route path='/AddBid' element={
+            <PrivateRoute><BidPage></BidPage></PrivateRoute>
+            }></Route>
             <Route path='/UserDetails' element={
             <PrivateRoute><UserDetails></UserDetails></PrivateRoute>
             }></Route>

@@ -31,9 +31,16 @@ export default function Navbar(){
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
+            {/* <li className="nav-item">
+              <Link className="nav-link" to='/Search'>Search</Link>
+            </li> */}
+            {user==null ? 
             <li className="nav-item">
               <Link className="nav-link" to='/Search'>Search</Link>
-            </li>
+            </li> : 
+            <li className="nav-item">
+              <Link className="nav-link" to='/SearchBid'>Search</Link>
+            </li>}
             {user==null ? <li className="nav-item">
               <Link className="nav-link" to='/Login'>Login</Link>
             </li> : <></>}
@@ -48,6 +55,9 @@ export default function Navbar(){
             </li>:<></>}
             {user!=null ? <li className="nav-item">
               <Link className="nav-link" to='/TenderSubmit'>Add Tender</Link>
+            </li>:<></>}
+            {user!=null ? <li className="nav-item">
+              <Link className="nav-link" to='/BidByUser'>Show Bids</Link>
             </li>:<></>}
             <li className="nav-item">
               <Link className="nav-link" to='/AboutUs'>About Us</Link>
